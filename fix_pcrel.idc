@@ -57,6 +57,13 @@ static get_pc_rel_register(ea)
             if (instr[0].type == o_reg && is_op_register(instr[1], 15))
                 return instr[0].reg;
     }
+    if (opcode == "LDR" || opcode == "ldr")
+    {
+        instr = DecodeInstruction(ea);
+        if (instr.n == 2)
+            if (instr[0].type == o_reg && instr[1].type == o_phrase && instr[1].reg == 15)
+                return instr[0].reg;
+    }
     return -1;
 }
 
